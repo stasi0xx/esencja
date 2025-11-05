@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import SectionSeparator from '../components/SectionSeparator';
 import AnimatedElement from '../components/AnimatedElement';

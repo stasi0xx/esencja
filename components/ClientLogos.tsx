@@ -17,7 +17,7 @@ const Counter: React.FC<CounterProps> = ({ to }) => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const controls = animate(0, to, {
+            animate(0, to, {
               duration: 2,
               ease: [0.22, 1, 0.36, 1], // easeOutQuint
               onUpdate(value) {

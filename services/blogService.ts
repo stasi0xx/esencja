@@ -11,16 +11,7 @@ function toSlug(title: string) {
         .replace(/^-+|-+$/g, '');
 }
 
-type DbPost = {
-    id: number;
-    created_at: string;
-    title: string | null;
-    short_description: string | null;
-    content: string | null;
-    img_url: string | null;
-    tag: string | null;
-    slug: string | null;
-};
+
 
 // Uwaga: jeśli Twój BlogPost ma camelCase (np. shortDescription, imgUrl),
 // możesz tu zrobić mapowanie. Poniżej zwracam bezpośrednio pola z bazy (snake_case),

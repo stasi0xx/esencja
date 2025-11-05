@@ -1,14 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 const AnimatedDots = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouse = useRef({ x: -1000, y: -1000 }); // Start mouse off-screen
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
+    const ctx = canvasEl.getContext('2d');
     if (!ctx) return;
+    const canvas = canvasEl;
 
     let animationFrameId: number;
     // Fix: Defined a dedicated interface for Dot for better type checking.
@@ -33,7 +34,7 @@ const AnimatedDots = () => {
             ? 'rgba(156, 163, 175, 0.4)' // gray-400
             : 'rgba(107, 114, 128, 0.5)'; // gray-500
     }
-    
+
     const getLineColor = (opacity: number) => {
         return document.documentElement.classList.contains('dark')
             ? `rgba(156, 163, 175, ${opacity})`
@@ -58,7 +59,8 @@ const AnimatedDots = () => {
     };
 
     class DotImpl implements Dot {
-      x: number;
+
+        x: number;
       y: number;
       originX: number;
       originY: number;
@@ -69,6 +71,7 @@ const AnimatedDots = () => {
       maxDist: number;
 
       constructor() {
+
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
         this.originX = this.x;
@@ -94,12 +97,12 @@ const AnimatedDots = () => {
         const dx = this.x - mouse.current.x;
         const dy = this.y - mouse.current.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        
+
         const forceDirectionX = dx / dist;
         const forceDirectionY = dy / dist;
-        
+
         const force = (this.maxDist - dist) / this.maxDist;
-        
+
         let directionX = 0;
         let directionY = 0;
 
@@ -128,7 +131,7 @@ const AnimatedDots = () => {
         if (this.y < -this.radius) this.y = canvas.height + this.radius;
       }
     }
-    
+
     const connectDots = () => {
         if (!ctx) return;
         for (let i = 0; i < dots.length; i++) {
@@ -163,12 +166,12 @@ const AnimatedDots = () => {
         mouse.current.x = e.clientX - rect.left;
         mouse.current.y = e.clientY - rect.top;
     };
-    
+
     const handleMouseLeave = () => {
         mouse.current.x = -1000;
         mouse.current.y = -1000;
     }
-    
+
     const parent = canvas.parentElement;
     if (!parent) return;
 
@@ -179,7 +182,7 @@ const AnimatedDots = () => {
 
     parent.addEventListener('mousemove', handleMouseMove);
     parent.addEventListener('mouseleave', handleMouseLeave);
-    
+
     animate();
 
     return () => {

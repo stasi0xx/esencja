@@ -1,4 +1,4 @@
-import React from 'react';
+
 import AnimatedElement from './AnimatedElement';
 
 const testimonials = [
