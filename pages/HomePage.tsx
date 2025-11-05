@@ -17,14 +17,32 @@ interface FeatureCardProps {
 }
 
 const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, children, delay = 0 }) => (
-    <AnimatedElement delay={delay} className="border border-gray-200 dark:border-gray-700 p-8 rounded-lg bg-white dark:bg-gray-800 text-center shadow-sm">
-        <div className="flex justify-center mb-4">
+    <AnimatedElement
+        delay={delay}
+        className="group
+               border border-gray-200 hover:border-gray-300 dark:border-neutral-800 dark:hover:border-neutral-700
+               p-8 rounded-lg
+               bg-white hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800
+               text-center
+               shadow-sm hover:shadow-md
+               transform-gpu will-change-transform
+               hover:scale-[1.03] hover:-translate-y-1
+               transition-transform transition-colors transition-shadow duration-500 ease-out
+               motion-reduce:transform-none motion-reduce:transition-none"
+    >
+        <div className="flex justify-center mb-4 transition-colors duration-500 ease-out">
             {icon}
         </div>
-        <h3 className="font-bold text-xl mb-3 text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{children}</p>
+        <h3 className="font-bold text-xl mb-3 text-gray-900 dark:text-white transition-colors duration-500 ease-out">
+            {title}
+        </h3>
+        <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed transition-colors duration-500 ease-out">
+            {children}
+        </p>
     </AnimatedElement>
 )
+
+
 
 const HomePage = () => {
     const heroRef = useRef<HTMLElement>(null);
@@ -100,7 +118,7 @@ const HomePage = () => {
             
             <div ref={pWrapperRef} className="transition-transform duration-300 ease-out will-change-transform">
                 <AnimatedElement delay={200}>
-                    <p className="max-w-3xl mx-auto mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400">
+                    <p className="max-w-3xl mx-auto mt-6 text-lg md:text-xl text-gray-600 dark:text-neutral-400">
                     Esencja to agencja marketingu cyfrowego skoncentrowana na wynikach. Wykorzystujemy strategie oparte na danych i kreatywne kampanie, aby pomóc Ci osiągnąć zrównoważony wzrost.
                     </p>
                 </AnimatedElement>
@@ -120,16 +138,16 @@ const HomePage = () => {
       <section className="container mx-auto px-6 py-16">
         <AnimatedElement className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Dlaczego My?</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">Łączymy innowacyjną technologię ze sprawdzoną wiedzą marketingową, aby dostarczać wyjątkowe rezultaty.</p>
+            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Łączymy innowacyjną technologię ze sprawdzoną wiedzą marketingową, aby dostarczać wyjątkowe rezultaty.</p>
         </AnimatedElement>
         <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <FeatureCard icon={<TrendingUp size={40} className="text-gray-800 dark:text-gray-200"/>} title="Strategia Oparta na Danych" delay={0}>
+            <FeatureCard icon={<TrendingUp size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Strategia Oparta na Danych" delay={0}>
                 Analizujemy dane rynkowe i zachowania konsumentów, aby tworzyć strategie, które są precyzyzyjne, skuteczne i dostosowane do Twoich celów.
             </FeatureCard>
-            <FeatureCard icon={<PenTool size={40} className="text-gray-800 dark:text-gray-200"/>} title="Kreatywne Kampanie" delay={200}>
+            <FeatureCard icon={<PenTool size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Kreatywne Kampanie" delay={200}>
                 Nasz zespół tworzy fascynujące narracje i oszałamiające wizualizacje, które przyciągają uwagę i rezonują z Twoją publicznością.
             </FeatureCard>
-            <FeatureCard icon={<Target size={40} className="text-gray-800 dark:text-gray-200"/>} title="Mierzalny ROI" delay={400}>
+            <FeatureCard icon={<Target size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Mierzalny ROI" delay={400}>
                 Skupiamy się na tym, co najważniejsze: dostarczaniu przejrzystych, mierzalnych wyników, które bezpośrednio wpływają na Twój zysk.
             </FeatureCard>
         </div>
@@ -152,7 +170,7 @@ const HomePage = () => {
       <section className="container mx-auto px-6 py-16 text-center">
         <AnimatedElement>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Gotowy na Rozwój?</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">Porozmawiajmy o tym, jak możemy wzmocnić Twoją markę. Zapoznaj się z naszymi analizami lub skontaktuj się z nami w celu uzyskania spersonalizowanej konsultacji.</p>
+            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Porozmawiajmy o tym, jak możemy wzmocnić Twoją markę. Zapoznaj się z naszymi analizami lub skontaktuj się z nami w celu uzyskania spersonalizowanej konsultacji.</p>
             <div className="mt-8">
                 <Button to="/insights" text="Przeglądaj Analizy" />
             </div>

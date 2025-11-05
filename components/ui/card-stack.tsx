@@ -36,7 +36,7 @@ export const CardStack = ({
         return (
           <motion.div
             key={card.id}
-            className={`absolute bg-white dark:bg-gray-800 h-80 w-80 md:h-80 md:w-[28rem] rounded-3xl p-6 shadow-xl border border-gray-200 dark:border-gray-700 shadow-black/[0.1] dark:shadow-black/20 flex flex-col justify-between ${
+            className={`absolute bg-white dark:bg-neutral-900 h-80 w-80 md:h-80 md:w-[28rem] rounded-3xl p-6 shadow-xl border border-gray-200 dark:border-neutral-800 shadow-black/[0.1] dark:shadow-black/20 flex flex-col justify-between ${
               index === 0 ? 'cursor-pointer' : ''
             }`}
             style={{
@@ -56,7 +56,7 @@ export const CardStack = ({
               <p className="text-gray-900 dark:text-white font-medium">
                 {card.name}
               </p>
-              <p className="text-gray-500 dark:text-gray-400 font-normal">
+              <p className="text-gray-500 dark:text-neutral-400 font-normal">
                 {card.designation}
               </p>
             </div>

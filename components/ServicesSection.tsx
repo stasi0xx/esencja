@@ -8,7 +8,7 @@ const ServicesSection = () => {
     <section className="container mx-auto px-6 py-16">
          <AnimatedElement className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Jak Reagujemy</h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed mt-4">
+            <p className="text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed mt-4">
             Sedno oferty, jej znaczenie w każdej firmie zajmującej się reklamą, marketingiem i promocją jest podobne. My dzielimy nasze obowiązki na obszary, za które odpowiadają wybrani specjaliści.
             </p>
         </AnimatedElement>
@@ -33,7 +33,7 @@ export const Highlight = ({
   return (
     <span
       className={cn(
-        "font-bold text-lg bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 px-1 py-0.5 rounded",
+        "font-bold text-lg bg-gray-200 text-gray-800 dark:bg-neutral-800 dark:text-neutral-200 px-1 py-0.5 rounded",
         className
       )}
     >

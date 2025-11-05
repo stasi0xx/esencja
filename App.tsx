@@ -11,7 +11,7 @@ function App() {
   return (
     <ThemeProvider>
       <HashRouter>
-        <div className="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 min-h-screen antialiased transition-colors duration-300">
+        <div className="bg-gray-50 dark:bg-neutral-950 text-gray-800 dark:text-neutral-200 min-h-screen antialiased transition-colors duration-300">
           <Header />
           <main className="pt-20">
             <Routes>

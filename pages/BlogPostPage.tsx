@@ -40,15 +40,15 @@ const BlogPostPage = () => {
   
   const ArticleSkeleton = () => (
     <div className="space-y-6 animate-pulse">
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
+        <div className="h-8 bg-gray-200 dark:bg-neutral-800 rounded w-3/4"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-full"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-5/6"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-full"></div>
         <br/>
-        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-4/6"></div>
+        <div className="h-6 bg-gray-200 dark:bg-neutral-800 rounded w-1/2"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-full"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-full"></div>
+        <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-4/6"></div>
     </div>
   );
 
@@ -61,7 +61,7 @@ const BlogPostPage = () => {
         <AnimatedElement>
           <h1 className="text-4xl md:text-6xl font-black text-center mb-8 dark:text-white">{title}</h1>
           {imageUrl && (
-            <div className="mb-12 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm">
+            <div className="mb-12 rounded-lg overflow-hidden border border-gray-200 dark:border-neutral-800 shadow-sm">
                 <img src={imageUrl} alt={title} className="w-full h-auto object-cover" />
             </div>
           )}

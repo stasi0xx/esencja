@@ -6,11 +6,11 @@ import AnimatedElement from '../components/AnimatedElement';
 import { ArrowRight } from 'lucide-react';
 
 const BlogCardSkeleton = () => (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 animate-pulse shadow-sm">
-        <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-        <div className="w-3/4 h-6 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
-        <div className="w-full h-4 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-        <div className="w-1/2 h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+    <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg p-6 animate-pulse shadow-sm">
+        <div className="w-full h-48 bg-gray-200 dark:bg-neutral-800 rounded mb-4"></div>
+        <div className="w-3/4 h-6 bg-gray-200 dark:bg-neutral-800 rounded mb-3"></div>
+        <div className="w-full h-4 bg-gray-200 dark:bg-neutral-800 rounded mb-4"></div>
+        <div className="w-1/2 h-4 bg-gray-200 dark:bg-neutral-800 rounded"></div>
     </div>
 );
 
@@ -22,15 +22,15 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => (
     <AnimatedElement delay={index * 100}>
         <Link to={`/insights/${post.slug}`} state={{ title: post.title, imageUrl: post.imageUrl, slug: post.slug }}>
-            <div className="group relative block bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-gray-700/50">
+            <div className="group relative block bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-gray-700/50">
                 <img src={post.imageUrl || 'https://picsum.photos/800/600'} alt={post.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
                 <div className="p-6">
-                    <span className="inline-block bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-semibold px-3 py-1 rounded-full mb-3">{post.category}</span>
+                    <span className="inline-block bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-300 text-xs font-semibold px-3 py-1 rounded-full mb-3">{post.category}</span>
                     <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{post.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4">{post.summary}</p>
+                    <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4">{post.summary}</p>
                 </div>
                 <div className="p-6 pt-0 mt-auto">
-                    <div className="flex items-center text-sm font-semibold text-gray-800 dark:text-gray-200">
+                    <div className="flex items-center text-sm font-semibold text-gray-800 dark:text-neutral-200">
                         Czytaj Więcej
                         <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
                     </div>
@@ -94,7 +94,7 @@ const BlogListPage = () => {
     <div className="container mx-auto px-6 py-16">
       <AnimatedElement>
         <h1 className="text-5xl md:text-6xl font-black text-center mb-4 dark:text-white">Analizy Marketingowe</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 text-center max-w-3xl mx-auto">
+        <p className="text-lg text-gray-600 dark:text-neutral-400 text-center max-w-3xl mx-auto">
           Praktyczne porady i eksperckie analizy dotyczące trendów, strategii i najlepszych praktyk w marketingu cyfrowym od naszego zespołu.
         </p>
       </AnimatedElement>
@@ -108,7 +108,7 @@ const BlogListPage = () => {
                 className={`px-6 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${
                     activeFilter === category
                     ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900 shadow-md'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
+                    : 'bg-white dark:bg-neutral-900 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-neutral-800 border border-gray-200 dark:border-neutral-800'
                 }`}
                 >
                 {category}

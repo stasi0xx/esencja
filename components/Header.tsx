@@ -77,7 +77,7 @@ const Header = () => {
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }): string =>
     `relative text-sm font-medium tracking-wider uppercase transition-colors duration-300 ease-in-out hover:text-gray-900 dark:hover:text-white after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-gray-900 dark:after:bg-white after:origin-left after:transition-transform after:duration-300 ${
-      isActive ? 'text-gray-900 dark:text-white after:scale-x-100' : 'text-gray-600 dark:text-gray-400 after:scale-x-0'
+      isActive ? 'text-gray-900 dark:text-white after:scale-x-100' : 'text-gray-600 dark:text-neutral-400 after:scale-x-0'
     } hover:after:scale-x-100`;
 
   const navItems = (
@@ -89,7 +89,7 @@ const Header = () => {
         <NavLink to="/insights" className={navLinkClasses} onClick={() => setIsOpen(false)}>Analizy</NavLink>
       </MagneticElement>
       <MagneticElement>
-        <a href="#opinie" className="relative text-sm font-medium tracking-wider uppercase transition-colors duration-300 ease-in-out text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-gray-900 dark:after:bg-white after:origin-left after:transition-transform after:duration-300 after:scale-x-0 hover:after:scale-x-100" onClick={() => setIsOpen(false)}>Opinie</a>
+        <a href="#opinie" className="relative text-sm font-medium tracking-wider uppercase transition-colors duration-300 ease-in-out text-gray-600 dark:text-neutral-400 hover:text-gray-900 dark:hover:text-white after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-gray-900 dark:after:bg-white after:origin-left after:transition-transform after:duration-300 after:scale-x-0 hover:after:scale-x-100" onClick={() => setIsOpen(false)}>Opinie</a>
       </MagneticElement>
     </>
   );
@@ -99,7 +99,7 @@ const Header = () => {
       <div className={`container mx-auto px-6 transition-all duration-300 ease-in-out ${isScrolled ? 'py-2' : 'py-4'}`}>
         <div 
           ref={headerContainerRef}
-          className={`relative flex items-center justify-between p-4 border border-gray-200/50 dark:border-gray-700/50 rounded-lg transition-all duration-300 ease-in-out overflow-hidden ${isScrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg shadow-md dark:shadow-2xl' : 'bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg'}`}
+          className={`relative flex items-center justify-between p-4 border border-gray-200/50 dark:border-neutral-800/50 rounded-lg transition-all duration-300 ease-in-out overflow-hidden ${isScrolled ? 'bg-white/90 dark:bg-neutral-950/90 backdrop-blur-lg shadow-md dark:shadow-2xl' : 'bg-white/70 dark:bg-neutral-950/70 backdrop-blur-lg'}`}
           style={{
             backgroundImage: `radial-gradient(400px at var(--mouse-x, -100%) var(--mouse-y, -100%), rgba(150, 150, 150, 0.1), transparent 80%)`
           }}
@@ -135,7 +135,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <div className={`transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'max-h-screen' : 'max-h-0 overflow-hidden'}`}>
         <div className="container mx-auto px-6">
-            <nav className="flex flex-col items-center space-y-6 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg py-8">
+            <nav className="flex flex-col items-center space-y-6 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-lg border border-t-0 border-gray-200 dark:border-neutral-800 rounded-b-lg py-8">
                 {navItems}
                 <MagneticElement>
                   <Button to="/insights" text="Nasze Usługi" onClick={() => setIsOpen(false)}/>

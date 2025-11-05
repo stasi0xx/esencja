@@ -102,11 +102,11 @@ const AdminPage = () => {
         return (
             <div className="container mx-auto px-6 py-16 flex items-center justify-center min-h-[calc(100vh-10rem)]">
                 <div className="w-full max-w-md">
-                    <form onSubmit={handleLogin} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                    <form onSubmit={handleLogin} className="bg-white dark:bg-neutral-900 p-8 rounded-lg shadow-md border border-gray-200 dark:border-neutral-800">
                         <div className="text-center mb-6">
                            <Lock className="mx-auto h-12 w-12 text-gray-400" />
                            <h1 className="text-2xl font-bold mt-4 text-gray-900 dark:text-white">Panel Administratora</h1>
-                           <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Wymagane uwierzytelnienie</p>
+                           <p className="text-gray-600 dark:text-neutral-400 text-sm mt-1">Wymagane uwierzytelnienie</p>
                         </div>
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Hasło</label>
@@ -117,7 +117,7 @@ const AdminPage = () => {
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)} 
                                 required 
-                                className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2" 
+                                className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2" 
                             />
                         </div>
                         {loginError && <p className="text-red-500 text-sm mt-2 text-center">{loginError}</p>}
@@ -141,7 +141,7 @@ const AdminPage = () => {
 
             <h1 className="text-4xl font-bold mb-8 text-center dark:text-white">Panel Administratora</h1>
             
-            <div className="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 mb-12">
+            <div className="max-w-2xl mx-auto bg-white dark:bg-neutral-900 p-8 rounded-lg shadow-md border border-gray-200 dark:border-neutral-800 mb-12">
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{isEditing ? 'Edytuj Post' : 'Dodaj Nowy Post'}</h2>
                     {!isEditing && (
@@ -157,15 +157,15 @@ const AdminPage = () => {
                 <form onSubmit={handleFormSubmit} className="space-y-6">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Tytuł</label>
-                        <input type="text" name="title" id="title" value={currentPost.title || ''} onChange={handleFormChange} required className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2" />
+                        <input type="text" name="title" id="title" value={currentPost.title || ''} onChange={handleFormChange} required className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2" />
                     </div>
                      <div>
                         <label htmlFor="summary" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Podsumowanie</label>
-                        <textarea name="summary" id="summary" value={currentPost.summary || ''} onChange={handleFormChange} required rows={3} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2"></textarea>
+                        <textarea name="summary" id="summary" value={currentPost.summary || ''} onChange={handleFormChange} required rows={3} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"></textarea>
                     </div>
                     <div>
                         <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategoria</label>
-                        <select name="category" id="category" value={currentPost.category || 'SEO'} onChange={handleFormChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2">
+                        <select name="category" id="category" value={currentPost.category || 'SEO'} onChange={handleFormChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2">
                             <option>SEO</option>
                             <option>Content Strategy</option>
                             <option>Social Media</option>
@@ -173,28 +173,28 @@ const AdminPage = () => {
                     </div>
                      <div>
                         <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300">URL Obrazka (opcjonalnie)</label>
-                        <input type="text" name="imageUrl" id="imageUrl" value={currentPost.imageUrl || ''} onChange={handleFormChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2" />
+                        <input type="text" name="imageUrl" id="imageUrl" value={currentPost.imageUrl || ''} onChange={handleFormChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2" />
                     </div>
                     <div>
                         <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Treść (Markdown, opcjonalnie)</label>
-                         <textarea name="content" id="content" value={currentPost.content || ''} onChange={handleFormChange} rows={10} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white p-2"></textarea>
+                         <textarea name="content" id="content" value={currentPost.content || ''} onChange={handleFormChange} rows={10} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"></textarea>
                          <p className="text-xs text-gray-500 mt-1">Uwaga: Możesz tutaj wpisać treść posta. Jeśli pozostawisz to pole puste, treść zostanie automatycznie wygenerowana przez AI przy pierwszym wyświetleniu.</p>
                     </div>
                     <div className="flex items-center justify-end space-x-4">
-                        {isEditing && <button type="button" onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-200 bg-gray-100 dark:bg-gray-600 border border-transparent rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">Anuluj Edycję</button>}
+                        {isEditing && <button type="button" onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-neutral-200 bg-gray-100 dark:bg-gray-600 border border-transparent rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">Anuluj Edycję</button>}
                         <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-gray-800 dark:bg-gray-200 dark:text-gray-900 border border-transparent rounded-md shadow-sm hover:bg-gray-900 dark:hover:bg-white">{isEditing ? 'Zapisz Zmiany' : 'Dodaj Post'}</button>
                     </div>
                 </form>
             </div>
 
-            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+            <div className="bg-white dark:bg-neutral-900 p-8 rounded-lg shadow-md border border-gray-200 dark:border-neutral-800">
                  <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Istniejące Posty ({posts.length})</h2>
                  <div className="space-y-4">
                     {posts.map(post => (
-                        <div key={post.slug} className="p-4 border dark:border-gray-600 rounded-md flex justify-between items-center bg-gray-50 dark:bg-gray-700/50">
+                        <div key={post.slug} className="p-4 border dark:border-gray-600 rounded-md flex justify-between items-center bg-gray-50 dark:bg-neutral-800/50">
                             <div>
                                 <h3 className="font-bold text-lg text-gray-900 dark:text-white">{post.title}</h3>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">/{post.slug}</p>
+                                <p className="text-sm text-gray-500 dark:text-neutral-400">/{post.slug}</p>
                             </div>
                             <div className="flex space-x-2">
                                 <button onClick={() => handleEdit(post)} className="px-3 py-1 text-sm font-medium text-blue-700 bg-blue-100 dark:bg-blue-900 dark:text-blue-200 rounded-md hover:bg-blue-200 dark:hover:bg-blue-800">Edytuj</button>
