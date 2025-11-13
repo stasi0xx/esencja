@@ -6,6 +6,7 @@ import BlogListPage from './pages/BlogListPage';
 import BlogPostPage from './pages/BlogPostPage';
 import AdminPage from './pages/AdminPage'; // Import AdminPage
 import { ThemeProvider } from './contexts/ThemeContext';
+import ServicesPage from "./pages/ServicesPage.tsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/insights" element={<BlogListPage />} />
               <Route path="/insights/:slug" element={<BlogPostPage />} />
               <Route path="/admin" element={<AdminPage />} /> {/* Add Admin Route */}
+              <Route path="/uslugi" element={<ServicesPage />} />
             </Routes>
           </main>
           <Footer />
