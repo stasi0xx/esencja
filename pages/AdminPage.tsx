@@ -2,6 +2,10 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { blogService } from '../services/blogService';
 import type { BlogPost } from '../types';
 import { Lock } from 'lucide-react';
+import { RichTextEditor } from "../components/RichTextEditor";
+import { sanitizeHtml } from "../utils/sanitizeHtml";
+import {ImageUploadInput} from "../components/imageUploadInput.tsx";
+
 
 const AdminPage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -10,6 +14,9 @@ const AdminPage = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [currentPost, setCurrentPost] = useState<Partial<BlogPost> & { originalSlug?: string }>({});
     const [isEditing, setIsEditing] = useState(false);
+    const [imageUrl, setImageUrl] = useState<string>('');
+
+
 
     useEffect(() => {
         // Load posts only if authenticated
@@ -172,14 +179,44 @@ const AdminPage = () => {
                         </select>
                     </div>
                      <div>
-                        <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 dark:text-gray-300">URL Obrazka (opcjonalnie)</label>
-                        <input type="text" name="imageUrl" id="imageUrl" value={currentPost.imageUrl || ''} onChange={handleFormChange} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2" />
-                    </div>
+                         <ImageUploadInput
+                             value={imageUrl}
+                             onChange={(url) => setImageUrl(url)}
+                             // bucket="blog-images" // opcjonalnie zmień nazwę, jeśli używasz innej
+                         />
+
+                     </div>
                     <div>
-                        <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Treść (Markdown, opcjonalnie)</label>
-                         <textarea name="content" id="content" value={currentPost.content || ''} onChange={handleFormChange} rows={10} className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"></textarea>
-                         <p className="text-xs text-gray-500 mt-1">Uwaga: Możesz tutaj wpisać treść posta. Jeśli pozostawisz to pole puste, treść zostanie automatycznie wygenerowana przez AI przy pierwszym wyświetleniu.</p>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Treść (HTML przez Jodit)
+                        </label>
+                        <div className="mt-2 border border-gray-300 dark:border-gray-600 rounded-md p-2 bg-white dark:bg-neutral-800">
+                            <RichTextEditor
+                                value={currentPost.content || ""}
+                                onChange={(val) =>
+                                    setCurrentPost((prev) => ({ ...prev, content: val }))
+                                }
+                                // opcjonalnie: zapisy na blur, jeśli wolisz rzadziej aktualizować state
+                                onBlurChange={(val) =>
+                                    setCurrentPost((prev) => ({ ...prev, content: val }))
+                                }
+                                height={360}
+                            />
+                        </div>
+
+                        <div className="mt-4">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                Podgląd (sanityzowany HTML)
+                            </label>
+                            <div
+                                className="rounded-md border border-gray-200 dark:border-neutral-800 p-4 bg-white dark:bg-neutral-900 prose dark:prose-invert max-w-none"
+                                dangerouslySetInnerHTML={{
+                                    __html: sanitizeHtml(currentPost.content || ""),
+                                }}
+                            />
+                        </div>
                     </div>
+
                     <div className="flex items-center justify-end space-x-4">
                         {isEditing && <button type="button" onClick={resetForm} className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-neutral-200 bg-gray-100 dark:bg-gray-600 border border-transparent rounded-md hover:bg-gray-200 dark:hover:bg-gray-500">Anuluj Edycję</button>}
                         <button type="submit" className="px-4 py-2 text-sm font-medium text-white bg-gray-800 dark:bg-gray-200 dark:text-gray-900 border border-transparent rounded-md shadow-sm hover:bg-gray-900 dark:hover:bg-white">{isEditing ? 'Zapisz Zmiany' : 'Dodaj Post'}</button>

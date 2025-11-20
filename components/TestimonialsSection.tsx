@@ -1,6 +1,7 @@
 
 import AnimatedElement from './AnimatedElement';
 
+
 const testimonials = [
   {
     quote: "Ich strategie SEO wyniosły naszą widoczność na zupełnie nowy poziom. Profesjonalizm i wyniki, które mówią same za siebie.",
@@ -41,6 +42,7 @@ const TestimonialsSection = () => {
           <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">
             Zaufali nam liderzy branży. Zobacz, co mówią o naszej współpracy.
           </p>
+
         </AnimatedElement>
       </div>
       
