@@ -19,26 +19,47 @@ interface BlogCardProps {
     index: number;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => (
-    <AnimatedElement delay={index * 100}>
-        <Link to={`/insights/${post.slug}`} state={{ title: post.title, imageUrl: post.imageUrl, slug: post.slug }}>
-            <div className="group relative block bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-gray-700/50">
-                <img src={post.imageUrl || 'https://picsum.photos/800/600'} alt={post.title} className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105" />
-                <div className="p-6">
-                    <span className="inline-block bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-300 text-xs font-semibold px-3 py-1 rounded-full mb-3">{post.category}</span>
-                    <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">{post.title}</h3>
-                    <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4">{post.summary}</p>
-                </div>
-                <div className="p-6 pt-0 mt-auto">
-                    <div className="flex items-center text-sm font-semibold text-gray-800 dark:text-neutral-200">
-                        Czytaj Więcej
-                        <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
+    // debug: zobacz co faktycznie przychodzi z backendu
+    console.log('BlogCard img_url for slug', post.slug, '=>', post.img_url);
+
+    return (
+        <AnimatedElement delay={index * 100}>
+            <Link
+                to={`/insights/${post.slug}`}
+                state={{ title: post.title, img_url: post.img_url , slug: post.slug }}
+            >
+                <div className="group relative block bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-gray-700/50">
+                    <img
+                        src={post.img_url || 'https://picsum.photos/800/600'}
+                        alt={post.title}
+                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="p-6">
+                        <span className="inline-block bg-gray-100 dark:bg-neutral-800 text-gray-600 dark:text-gray-300 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                            {post.category}
+                        </span>
+                        <h3 className="font-bold text-lg text-gray-900 dark:text-white mb-2">
+                            {post.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-neutral-400 text-sm leading-relaxed mb-4">
+                            {post.summary}
+                        </p>
+                    </div>
+                    <div className="p-6 pt-0 mt-auto">
+                        <div className="flex items-center text-sm font-semibold text-gray-800 dark:text-neutral-200">
+                            Czytaj Więcej
+                            <ArrowRight
+                                size={16}
+                                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Link>
-    </AnimatedElement>
-);
+            </Link>
+        </AnimatedElement>
+    );
+};
 
 // Fix: Changed Polish category names to English to match the BlogPost type.
 const categories = ['Wszystkie', 'SEO', 'Content Strategy', 'Social Media'];

@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabaseClient';
 
-const BUCKET = 'blog-images'; // dostosuj do swojej nazwy
+const BUCKET = 'photos'; // dostosuj do swojej nazwy
 
 function getExt(file: File) {
     const name = file.name || '';

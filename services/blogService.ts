@@ -11,6 +11,31 @@ function toSlug(title: string) {
         .replace(/^-+|-+$/g, '');
 }
 
+interface BlogPostRow {
+    id?: string;
+    created_at?: string;
+    title: string;
+    short_description?: string | null;
+    content?: string | null;
+    img_url?: string | null; // dokładnie jak w tabeli
+    tag?: string | null;
+    slug: string;
+}
+
+
+function mapRowToBlogPost(row: BlogPostRow): BlogPost {
+    return {
+        title: row.title,
+        summary: row.short_description ?? '',
+        slug: row.slug,
+        content: row.content ?? '',
+        img_url: row.img_url ?? undefined,
+        // u Ciebie w types.ts pole to `category`,
+        // w bazie masz `tag`, więc mapujemy:
+        category: row.tag ?? '',
+    };
+}
+
 
 
 // Uwaga: jeśli Twój BlogPost ma camelCase (np. shortDescription, imgUrl),
@@ -29,7 +54,7 @@ export const blogService = {
             return [];
         }
 
-        return (data ?? []) as unknown as BlogPost[];
+        return (data ?? []).map((row) => mapRowToBlogPost(row as BlogPostRow));
     },
 
     // Pobierz pojedynczy post po slug
@@ -75,15 +100,17 @@ export const blogService = {
             return null;
         }
 
-        const payload = {
+        console.log('Dodawanie postu z slugiem:', post.img_url);
+
+        const payload: BlogPostRow = {
             slug: newSlug,
             title,
-            short_description: (post as any).short_description ?? null,
-            content: (post as any).content ?? null,
-            img_url: (post as any).img_url ?? null,
-            tag: (post as any).tag ?? null,
-            // created_at wypełni się automatycznie w bazie
+            short_description: post.summary ?? null,
+            content: post.content ?? null,
+            img_url: post.img_url ?? null,  // KLUCZOWA LINIA: zapis URL-a
+            tag: post.category ?? null,
         };
+
 
         const { data, error } = await supabase
             .from('Posts')
