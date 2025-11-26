@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { CardStack } from "./ui/card-stack";
 import { cn } from "../lib/utils";
 import AnimatedElement from './AnimatedElement';
+import {
+    Palette,
+    MonitorSmartphone,
+    Lightbulb,
+    Printer,
+    MousePointerClick,
+    Camera,
+    PartyPopper,
+} from "lucide-react";
+
 
 const ServicesSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -9,9 +19,9 @@ const ServicesSection = () => {
   return (
       <section className="container mx-auto px-6 py-16">
         <AnimatedElement className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Jak Reagujemy</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Jak działamy</h2>
           <p className="text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto text-lg leading-relaxed mt-4">
-            Sedno oferty, jej znaczenie w każdej firmie zajmującej się reklamą, marketingiem i promocją jest podobne. My dzielimy nasze obowiązki na obszary, za które odpowiadają wybrani specjaliści.
+              Każdy projekt traktujemy jak wspólną misję. Nasz zespół składa się z ekspertów, którzy odpowiadają za konkretne obszary — od grafiki, przez kampanie online, aż po wydarzenia i branding. Dzięki temu każda część Twojej promocji jest w rękach specjalistów, a cały projekt działa sprawnie i bez niespodzianek.
           </p>
         </AnimatedElement>
 
@@ -68,76 +78,83 @@ export const Highlight = ({
 };
 
 const CARDS = [
-  {
-    id: 0,
-    name: "Projekty graficzne",
-    designation: "Design & Branding",
-    content: (
-        <p>
-          Tworzymy spójne wizualnie projekty na potrzeby <Highlight>druku, internetu</Highlight> i reklamy zewnętrznej, które budują silny wizerunek marki.
-        </p>
-    ),
-  },
-  {
-    id: 1,
-    name: "Tworzenie stron www",
-    designation: "Web Development",
-    content: (
-        <p>
-          Budujemy nowoczesne <Highlight>strony, serwisy i sklepy online</Highlight>, które są szybkie, responsywne i zoptymalizowane pod kątem konwersji.
-        </p>
-    ),
-  },
-  {
-    id: 2,
-    name: "Koncepcje i strategie",
-    designation: "Marketing & Social Media",
-    content: (
-        <p>
-          Opracowujemy <Highlight>kreatywne strategie marketingowe</Highlight> i prowadzimy skuteczne działania w mediach społecznościowych, aby dotrzeć do Twoich klientów.
-        </p>
-    ),
-  },
-  {
-    id: 3,
-    name: "Druk i oznakowanie",
-    designation: "Materiały reklamowe",
-    content: (
-        <p>
-          Zapewniamy kompleksową obsługę w zakresie <Highlight>druku materiałów reklamowych</Highlight> oraz profesjonalnego oznakowania pojazdów i obiektów.
-        </p>
-    ),
-  },
-  {
-    id: 4,
-    name: "Kampanie Google Ads",
-    designation: "Performance Marketing",
-    content: (
-        <p>
-          Prowadzimy precyzyjnie targetowane <Highlight>kampanie w wyszukiwarce Google</Highlight>, maksymalizując zwrot z inwestycji w reklamę.
-        </p>
-    ),
-  },
-  {
-    id: 5,
-    name: "Sesje fotograficzne",
-    designation: "Fotografia produktowa i wizerunkowa",
-    content: (
-        <p>
-          Organizujemy profesjonalne <Highlight>sesje fotograficzne</Highlight>, które podkreślają jakość Twoich produktów i profesjonalizm Twojej firmy.
-        </p>
-    ),
-  },
-  {
-    id: 6,
-    name: "Organizacja imprez",
-    designation: "Event Marketing",
-    content: (
-        <p>
-          Specjalizujemy się w organizacji niezapomnianych <Highlight>imprez firmowych</Highlight> i angażujących wydarzeń sportowych.
-        </p>
-    ),
-  },
+    {
+        id: 0,
+        name: "Projekty graficzne",
+        designation: "Design & Branding",
+        icon: <Palette className="h-10 w-10" />,
+        content: (
+            <p>
+                Tworzymy spójne wizualnie projekty na potrzeby <Highlight>druku, internetu</Highlight> i reklamy zewnętrznej, które budują silny wizerunek marki.
+            </p>
+        ),
+    },
+    {
+        id: 1,
+        name: "Tworzenie stron www",
+        designation: "Web Development",
+        icon: <MonitorSmartphone className="h-10 w-10" />,
+        content: (
+            <p>
+                Budujemy nowoczesne <Highlight>strony, serwisy i sklepy online</Highlight>, które są szybkie, responsywne i zoptymalizowane pod kątem konwersji.
+            </p>
+        ),
+    },
+    {
+        id: 2,
+        name: "Koncepcje i strategie",
+        designation: "Marketing & Social Media",
+        icon: <Lightbulb className="h-10 w-10" />,
+        content: (
+            <p>
+                Opracowujemy <Highlight>kreatywne strategie marketingowe</Highlight> i prowadzimy skuteczne działania w mediach społecznościowych, aby dotrzeć do Twoich klientów.
+            </p>
+        ),
+    },
+    {
+        id: 3,
+        name: "Druk i oznakowanie",
+        designation: "Materiały reklamowe",
+        icon: <Printer className="h-10 w-10" />,
+        content: (
+            <p>
+                Zapewniamy kompleksową obsługę w zakresie <Highlight>druku materiałów reklamowych</Highlight> oraz profesjonalnego oznakowania pojazdów i obiektów.
+            </p>
+        ),
+    },
+    {
+        id: 4,
+        name: "Kampanie Google Ads",
+        designation: "Performance Marketing",
+        icon: <MousePointerClick className="h-10 w-10" />,
+        content: (
+            <p>
+                Prowadzimy precyzyjnie targetowane <Highlight>kampanie w wyszukiwarce Google</Highlight>, maksymalizując zwrot z inwestycji w reklamę.
+            </p>
+        ),
+    },
+    {
+        id: 5,
+        name: "Sesje fotograficzne",
+        designation: "Fotografia produktowa i wizerunkowa",
+        icon: <Camera className="h-10 w-10" />,
+        content: (
+            <p>
+                Organizujemy profesjonalne <Highlight>sesje fotograficzne</Highlight>, które podkreślają jakość Twoich produktów i profesjonalizm Twojej firmy.
+            </p>
+        ),
+    },
+    {
+        id: 6,
+        name: "Organizacja imprez",
+        designation: "Event Marketing",
+        icon: <PartyPopper className="h-10 w-10" />,
+        content: (
+            <p>
+                Specjalizujemy się w organizacji niezapomnianych <Highlight>imprez firmowych</Highlight> i angażujących wydarzeń sportowych.
+            </p>
+        ),
+    },
 ];
 
 export default ServicesSection;

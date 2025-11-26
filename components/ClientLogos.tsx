@@ -58,10 +58,10 @@ const ClientLogos = () => {
           <Counter to={92} />%
         </h2>
         <p className="text-xl md:text-2xl font-bold text-gray-700 dark:text-gray-300 mt-2">
-          Zadowolonych Klientów
+          Naszych klientów wraca po więcej.
         </p>
         <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">
-          Jesteśmy dumni z partnerstw, które budujemy. Twoje zaufanie jest naszym największym sukcesem.
+          Bo działamy sprawnie, z pomysłem i bez zadęcia. Nie mierzymy się tylko liczbami - ważne są relacja, efekt i satysfakcja.
         </p>
       </AnimatedElement>
       

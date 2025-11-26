@@ -10,6 +10,9 @@ import ServicesPage from "./pages/ServicesPage.tsx";
 import { AuthProvider } from './auth/AuthProvider';
 import { ProtectedRoute } from './auth/ProtectedRoute';
 import LoginPage from './auth/LoginPage';
+import CookieConsent from "./components/CookieConsent.tsx";
+import ContactPage from "./pages/ContactPage.tsx";
+import ScrollProgressBar from "./components/ScrollProgressBar.tsx";
 
 
 function App() {
@@ -18,6 +21,8 @@ function App() {
       <HashRouter>
         <AuthProvider>
           <div className="bg-gray-50 dark:bg-neutral-950 text-gray-800 dark:text-neutral-200 min-h-screen antialiased transition-colors duration-300">
+            <ScrollProgressBar />
+
             <Header />
             <main className="pt-20">
               <Routes>
@@ -27,6 +32,7 @@ function App() {
                 <Route path="/insights/:slug" element={<BlogPostPage />} />
                 <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} /> {/* Add Admin Route */}
                 <Route path="/uslugi" element={<ServicesPage />} />
+                <Route path="/kontakt" element={<ContactPage />} />
               </Routes>
             </main>
             <Footer />
@@ -34,6 +40,7 @@ function App() {
         </AuthProvider>
 
       </HashRouter>
+      <CookieConsent />
     </ThemeProvider>
   );
 }

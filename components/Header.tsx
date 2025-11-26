@@ -83,13 +83,13 @@ const Header = () => {
   const navItems = (
       <>
         <MagneticElement>
-          <NavLink to="/" className={navLinkClasses} onClick={() => setIsOpen(false)}>Strona Główna</NavLink>
+          <NavLink to="/" className={navLinkClasses} onClick={() => setIsOpen(false)}>KTO jesteśmy</NavLink>
         </MagneticElement>
         <MagneticElement>
-          <NavLink to="/insights" className={navLinkClasses} onClick={() => setIsOpen(false)}>Analizy</NavLink>
+          <NavLink to="/uslugi" className={navLinkClasses} onClick={() => setIsOpen(false)}>CO robimy</NavLink>
         </MagneticElement>
         <MagneticElement>
-          <NavLink to="/uslugi" className={navLinkClasses} onClick={() => setIsOpen(false)}>Nasze Usługi</NavLink>
+          <NavLink to="/insights" className={navLinkClasses} onClick={() => setIsOpen(false)}>JAK realizujemy</NavLink>
         </MagneticElement>
       </>
   );
@@ -105,8 +105,18 @@ const Header = () => {
               }}
           >
             <MagneticElement>
-              <Link to="/" className="inline-flex items-center">
-                <img
+              <Link
+                  to="/"
+                  className="inline-flex items-center"
+                  onClick={() => {
+                    // mały timeout, żeby dać routerowi czas na zmianę trasy (lub jej potwierdzenie)
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 0);
+                  }}
+              >
+
+              <img
                     src="/logo_ese_white.PNG"
                     alt="Logo Esencja"
                     className={`w-auto transition-all duration-300 invert dark:invert-0 ${isScrolled ? 'h-8' : 'h-10'}`}
@@ -122,7 +132,7 @@ const Header = () => {
 
             <div className="hidden md:flex items-center gap-4">
               <MagneticElement>
-                <Button to="/insights" text="Nasze Usługi"/>
+                <Button to="/insights" text="Twój ruch"/>
               </MagneticElement>
               <ThemeSwitch />
             </div>
@@ -144,7 +154,7 @@ const Header = () => {
             <nav className="flex flex-col items-center space-y-6 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-lg border border-t-0 border-gray-200 dark:border-neutral-800 rounded-b-lg py-8">
               {navItems}
               <MagneticElement>
-                <Button to="/insights" text="Nasze Usługi" onClick={() => setIsOpen(false)}/>
+                <Button to="/kontakt" text="Twój ruch" onClick={() => setIsOpen(false)}/>
               </MagneticElement>
             </nav>
           </div>

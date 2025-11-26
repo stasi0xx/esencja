@@ -1,5 +1,7 @@
 import React from 'react';
 import { Paintbrush, Globe, Megaphone, Printer, Search, Camera, PartyPopper } from 'lucide-react';
+import Button from "../components/Button.tsx";
+
 
 type Service = {
     title: string;
@@ -9,38 +11,38 @@ type Service = {
 
 const services: Service[] = [
     {
-        title: 'Projekty graficzne',
-        description: 'Projekty graficzne na potrzeby druku, internetu czy reklamy zewnętrznej.',
+        title: 'Grafika, która działa ',
+        description: 'Projekty do druku, internetu i reklamy zewnętrznej.',
         icon: <Paintbrush className="h-6 w-6" />,
     },
     {
-        title: 'Tworzenie stron www i serwisów',
-        description: 'Strony www, serwisy internetowe oraz sklepy online.',
+        title: 'Strony i sklepy ',
+        description: 'Nowoczesne, funkcjonalne, przyjazne użytkownikom.',
         icon: <Globe className="h-6 w-6" />,
     },
     {
-        title: 'Koncepcje i strategie',
-        description: 'Koncepcje kreatywne, strategie marketingowe, działania w social media.',
+        title: 'Kreacja i strategia ',
+        description: 'Kampanie marketingowe i social media, które przyciągają uwagę.',
         icon: <Megaphone className="h-6 w-6" />,
     },
     {
-        title: 'Druk i oznakowanie',
-        description: 'Druk materiałów reklamowych, oznakowanie pojazdów i obiektów.',
+        title: 'Druk i branding ',
+        description: ' Materiały reklamowe, oznakowanie pojazdów i obiektów.',
         icon: <Printer className="h-6 w-6" />,
     },
     {
         title: 'Kampanie Google Ads',
-        description: 'Kampanie AdWords w wyszukiwarce Google.',
+        description: 'Docieramy precyzyjnie do Twoich klientów.',
         icon: <Search className="h-6 w-6" />,
     },
     {
-        title: 'Sesje fotograficzne',
-        description: 'Sesje fotograficzne – produktowe i wizerunkowe.',
+        title: 'Fotografia, która sprzedaje ',
+        description: 'Profesjonalne sesje dla Twojej marki.',
         icon: <Camera className="h-6 w-6" />,
     },
     {
-        title: 'Organizacja wydarzeń',
-        description: 'Organizacja imprez firmowych i wydarzeń sportowych.',
+        title: 'Eventy z efektem ',
+        description: 'Imprezy firmowe i wydarzenia sportowe z pełnym wsparciem',
         icon: <PartyPopper className="h-6 w-6" />,
     },
 ];
@@ -49,9 +51,9 @@ const ServicesPage: React.FC = () => {
     return (
         <main className="container mx-auto px-6 py-16">
             <header className="text-center mb-12">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Usługi</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Co robimy?</h1>
                 <p className="mt-4 text-gray-600 dark:text-neutral-400 max-w-2xl mx-auto">
-                    Sprawdź, w czym możemy pomóc Twojej marce – od projektów graficznych, przez www, po kampanie i eventy.
+                    Działamy kompleksowo, z pomysłem i konsekwencją, aby każda inicjatywa przynosiła realny efekt dla Twojej marki.
                 </p>
             </header>
 
@@ -73,6 +75,10 @@ const ServicesPage: React.FC = () => {
                     ))}
                 </ul>
             </section>
+            <div className="mt-12 flex justify-center">
+                <Button to="/kontakt" text="Porozmawiajmy o Twoim projekcie" />
+            </div>
+
         </main>
     );
 };

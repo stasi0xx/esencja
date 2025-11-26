@@ -96,7 +96,9 @@ const HomePage = () => {
     }, []);
 
   return (
-    <div className="overflow-x-hidden">
+    <div className="relative overflow-hidden">
+      <AnimatedDots />
+      <div className="overflow-x-hidden">
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -108,10 +110,13 @@ const HomePage = () => {
             <div ref={h1WrapperRef} className="transition-transform duration-300 ease-out will-change-transform">
                 <AnimatedElement>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-gray-900 dark:text-white">
-                    Wzmocnij Swoją <span 
+                    Z <span
                         className="text-transparent bg-clip-text bg-gradient-to-br from-gray-600 to-gray-900 dark:from-gray-400 dark:to-white bg-[length:200%_200%] transition-[background-position] duration-500 ease-out"
                         style={{ backgroundPosition: 'calc(var(--spotlight-x, 50%) * 0.2) calc(var(--spotlight-y, 50%) * 0.2)' }}
-                    >Markę</span>
+                    >Pomysłu</span> Robimy <span
+                        className="text-transparent bg-clip-text bg-gradient-to-br from-gray-600 to-gray-900 dark:from-gray-400 dark:to-white bg-[length:200%_200%] transition-[background-position] duration-500 ease-out"
+                        style={{ backgroundPosition: 'calc(var(--spotlight-x, 50%) * 0.2) calc(var(--spotlight-y, 50%) * 0.2)' }}
+                    >efekt</span>
                     </h1>
                 </AnimatedElement>
             </div>
@@ -119,8 +124,7 @@ const HomePage = () => {
             <div ref={pWrapperRef} className="transition-transform duration-300 ease-out will-change-transform">
                 <AnimatedElement delay={200}>
                     <p className="max-w-3xl mx-auto mt-6 text-lg md:text-xl text-gray-600 dark:text-neutral-400">
-                    Esencja to agencja marketingu cyfrowego skoncentrowana na wynikach. Wykorzystujemy strategie oparte na danych i kreatywne kampanie, aby pomóc Ci osiągnąć zrównoważony wzrost.
-                    </p>
+                        Tworzymy kreacje, które nie komplikują, po prostu działają. Opieramy się na solidnej strategii, nowoczesnym designie i przekazie, które jasno wskazują Twoim klientom, dlaczego warto wybrać właśnie Ciebie.                    </p>
                 </AnimatedElement>
             </div>
 
@@ -138,17 +142,17 @@ const HomePage = () => {
       <section className="container mx-auto px-6 py-16">
         <AnimatedElement className="text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Dlaczego My?</h2>
-            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Łączymy innowacyjną technologię ze sprawdzoną wiedzą marketingową, aby dostarczać wyjątkowe rezultaty.</p>
+            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Realizujemy identyfikacje wizualne, strony i sklepy internetowe, materiały graficzne oraz kampanie w social mediach. Bez fajerwerków na pokaz, za to z rzetelnością, dobrą estetyką i pomysłami, które realnie wspierają rozwój marki.</p>
         </AnimatedElement>
         <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <FeatureCard icon={<TrendingUp size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Strategia Oparta na Danych" delay={0}>
-                Analizujemy dane rynkowe i zachowania konsumentów, aby tworzyć strategie, które są precyzyzyjne, skuteczne i dostosowane do Twoich celów.
+            <FeatureCard icon={<TrendingUp size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Efekty, które widać" delay={0}>
+                Nie kopiujemy szablonów. Wdrażamy działania marketingowe oparte na nietypowych pomysłach i nowoczesnych ideach. Kreujemy wizje, które przyciągają uwagę i zostają w pamięci.
             </FeatureCard>
-            <FeatureCard icon={<PenTool size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Kreatywne Kampanie" delay={200}>
-                Nasz zespół tworzy fascynujące narracje i oszałamiające wizualizacje, które przyciągają uwagę i rezonują z Twoją publicznością.
+            <FeatureCard icon={<PenTool size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Terminowość i transparentność" delay={200}>
+                Działamy sprawnie i punktualnie. Wszystkie projekty realizujemy według jasnych zasad, z wcześniejszymi wycenami i kalkulacjami, żebyś zawsze wiedział, na czym stoisz.
             </FeatureCard>
-            <FeatureCard icon={<Target size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Mierzalny ROI" delay={400}>
-                Skupiamy się na tym, co najważniejsze: dostarczaniu przejrzystych, mierzalnych wyników, które bezpośrednio wpływają na Twój zysk.
+            <FeatureCard icon={<Target size={40} className="text-gray-800 dark:text-neutral-200"/>} title="Nowoczesność i odpowiedzialność" delay={400}>
+                Wykorzystujemy nowoczesne technologie i narzędzia, w tym AI, w sposób przemyślany i odpowiedzialny. Nowoczesność nie zastępuje rozsądku — wspiera go.
             </FeatureCard>
         </div>
       </section>
@@ -169,13 +173,14 @@ const HomePage = () => {
       {/* CTA Section */}
       <section className="container mx-auto px-6 py-16 text-center">
         <AnimatedElement>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Gotowy na Rozwój?</h2>
-            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Porozmawiajmy o tym, jak możemy wzmocnić Twoją markę. Zapoznaj się z naszymi analizami lub skontaktuj się z nami w celu uzyskania spersonalizowanej konsultacji.</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Sprawdź Co robimy</h2>
+            <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Poznaj historie marek, którym pomogliśmy i odkryj nasze podejście do kreatywnej reklamy.</p>
             <div className="mt-8">
-                <Button to="/insights" text="Przeglądaj Analizy" />
+                <Button to="/kontakt" text="Twój ruch" />
             </div>
         </AnimatedElement>
       </section>
+    </div>
     </div>
   );
 };
