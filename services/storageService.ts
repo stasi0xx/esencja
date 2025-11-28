@@ -16,6 +16,7 @@ function datePrefix() {
     return `${y}/${m}/${dd}`;
 }
 
+
 export async function uploadImageToStorage(file: File) {
     if (!file) throw new Error('Brak pliku');
     if (!file.type.startsWith('image/')) throw new Error('Dozwolone są tylko obrazy');
@@ -35,8 +36,12 @@ export async function uploadImageToStorage(file: File) {
 
     if (upErr) throw upErr;
 
-    const { data } = supabase.storage.from(BUCKET).getPublicUrl(path);
-    if (!data?.publicUrl) throw new Error('Nie udało się uzyskać URL');
+    // Zamiast getPublicUrl() użyj createSignedUrl()
+    const { data, error } = await supabase.storage
+        .from(BUCKET)
+        .createSignedUrl(path, 60 * 60 * 24 * 365); // 1 rok ważności
 
-    return { publicUrl: data.publicUrl, path };
+    if (error || !data?.signedUrl) throw new Error('Nie udało się uzyskać URL');
+
+    return { publicUrl: data.signedUrl, path };
 }

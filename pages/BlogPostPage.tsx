@@ -54,7 +54,7 @@ const BlogPostPage = () => {
     );
 
     const title = post?.title || (location.state as any)?.title || 'Ładowanie...';
-    const imageUrl = post?.imageUrl || initialImageUrl;
+    const imageUrl = post?.img_url || initialImageUrl;
 
     // Heurystyka: jeśli treść zawiera tagi HTML, potraktuj ją jako HTML
     const content = post?.content || '';

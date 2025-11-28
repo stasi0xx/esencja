@@ -27,6 +27,7 @@ function datePrefix() {
     return `${y}/${m}/${dd}`;
 }
 
+
 async function uploadToSupabase(file: File, bucket: string) {
     const ext = getExt(file);
     const id = crypto.randomUUID();
@@ -42,9 +43,14 @@ async function uploadToSupabase(file: File, bucket: string) {
 
     if (error) throw error;
 
-    const { data } = supabase.storage.from(bucket).getPublicUrl(path);
-    if (!data?.publicUrl) throw new Error('Brak publicznego URL z Supabase');
-    return { publicUrl: data.publicUrl, path };
+    // Zamiast getPublicUrl() użyj createSignedUrl()
+    const { data, error: signError } = await supabase.storage
+        .from(bucket)
+        .createSignedUrl(path, 60 * 60 * 24 * 365); // 1 rok ważności
+
+    if (signError || !data?.signedUrl) throw new Error('Nie udało się uzyskać URL z Supabase');
+
+    return { publicUrl: data.signedUrl, path };
 }
 
 export function ImageUploadInput({
