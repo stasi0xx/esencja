@@ -69,7 +69,7 @@ const BlogAdmin: React.FC = () => {
         }
 
         if (isEditing && currentPost.originalSlug) {
-            const updatedPost: BlogPost = {
+            const updatedPost: Partial<BlogPost> = {
                 ...postData,
                 slug: currentPost.slug || currentPost.originalSlug,
             };
@@ -77,6 +77,7 @@ const BlogAdmin: React.FC = () => {
         } else {
             await blogService.addPost(postData);
         }
+
 
         resetForm();
         await loadPosts();
