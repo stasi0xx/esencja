@@ -132,7 +132,7 @@ const Header = () => {
 
             <div className="hidden md:flex items-center gap-4">
               <MagneticElement>
-                <Button to="/insights" text="Twój ruch"/>
+                <Button to="/kontakt" text="Twój ruch"/>
               </MagneticElement>
               <ThemeSwitch />
             </div>

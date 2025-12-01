@@ -1,7 +1,7 @@
+
 import type { BlogPost } from '../types';
 import { supabase } from '../lib/supabaseClient';
 
-// Pomocnicza funkcja do budowy sluga
 function toSlug(title: string) {
     return title
         .toLowerCase()
@@ -12,41 +12,40 @@ function toSlug(title: string) {
 }
 
 interface BlogPostRow {
-    id?: string;
+    id?: string; // Zmienione na opcjonalne
     created_at?: string;
     title: string;
     short_description?: string | null;
     content?: string | null;
-    img_url?: string | null; // dokładnie jak w tabeli
+    img_url?: string | null;
     tag?: string | null;
     slug: string;
+    order?: number;
 }
 
-
 function mapRowToBlogPost(row: BlogPostRow): BlogPost {
+    if (!row.id) {
+        throw new Error('Post musi mieć ID');
+    }
     return {
+        id: row.id,
         title: row.title,
         summary: row.short_description ?? '',
         slug: row.slug,
         content: row.content ?? '',
         img_url: row.img_url ?? undefined,
-        // u Ciebie w types.ts pole to `category`,
-        // w bazie masz `tag`, więc mapujemy:
         category: row.tag ?? '',
+        order: row.order ?? 0,
     };
 }
 
-
-
-// Uwaga: jeśli Twój BlogPost ma camelCase (np. shortDescription, imgUrl),
-// możesz tu zrobić mapowanie. Poniżej zwracam bezpośrednio pola z bazy (snake_case),
-// co jest najprostsze i bezpieczne typowo.
 export const blogService = {
-    // Pobierz wszystkie posty (najnowsze na górze)
+    // Pobierz wszystkie posty (sortuj po order)
     async getPosts(): Promise<BlogPost[]> {
         const { data, error } = await supabase
-            .from('Posts') // ważne: wielka litera jak w schemacie
-            .select('id,created_at,title,short_description,content,img_url,tag,slug')
+            .from('Posts')
+            .select('id,created_at,title,short_description,content,img_url,tag,slug,order')
+            .order('order', { ascending: true })
             .order('created_at', { ascending: false });
 
         if (error) {
@@ -54,14 +53,21 @@ export const blogService = {
             return [];
         }
 
-        return (data ?? []).map((row) => mapRowToBlogPost(row as BlogPostRow));
+        return (data ?? [])
+            .filter((row) => !!row.id)
+            .map((row) => mapRowToBlogPost(row));
+    },
+
+    // Pobierz wszystkie posty (stara metoda, dla kompatybilności)
+    async getAllPosts(): Promise<BlogPost[]> {
+        return this.getPosts();
     },
 
     // Pobierz pojedynczy post po slug
     async getPostBySlug(slug: string): Promise<BlogPost | null> {
         const { data, error } = await supabase
             .from('Posts')
-            .select('id,created_at,title,short_description,content,img_url,tag,slug')
+            .select('id,created_at,title,short_description,content,img_url,tag,slug,order')
             .eq('slug', slug)
             .maybeSingle();
 
@@ -70,12 +76,15 @@ export const blogService = {
             return null;
         }
 
-        return (data as unknown as BlogPost) ?? null;
+        if (!data || !data.id) {
+            return null;
+        }
+
+        return mapRowToBlogPost(data as BlogPostRow);
     },
 
-    // Dodaj nowy post – slug z tytułu
+    // Dodaj nowy post
     async addPost(post: Omit<BlogPost, 'slug' | 'id' | 'created_at'>): Promise<BlogPost | null> {
-        // Zakładam, że post.title istnieje
         const title = (post as any).title as string | undefined;
         if (!title) {
             console.error('addPost: wymagany tytuł');
@@ -84,7 +93,6 @@ export const blogService = {
 
         const newSlug = toSlug(title);
 
-        // Opcjonalnie: sprawdzenie duplikatu sluga (brak unikalności w schemacie)
         const { data: existing, error: checkErr } = await supabase
             .from('Posts')
             .select('slug')
@@ -100,22 +108,20 @@ export const blogService = {
             return null;
         }
 
-        console.log('Dodawanie postu z slugiem:', post.img_url);
-
-        const payload: BlogPostRow = {
+        const payload = {
             slug: newSlug,
             title,
             short_description: post.summary ?? null,
             content: post.content ?? null,
-            img_url: post.img_url ?? null,  // KLUCZOWA LINIA: zapis URL-a
+            img_url: post.img_url ?? null,
             tag: post.category ?? null,
+            order: 0,
         };
-
 
         const { data, error } = await supabase
             .from('Posts')
             .insert(payload)
-            .select('id,created_at,title,short_description,content,img_url,tag,slug')
+            .select('id,created_at,title,short_description,content,img_url,tag,slug,order')
             .single();
 
         if (error) {
@@ -123,19 +129,25 @@ export const blogService = {
             return null;
         }
 
-        return data as unknown as BlogPost;
+        if (!data || !data.id) {
+            console.error('addPost: odpowiedź bez ID');
+            return null;
+        }
+
+        return mapRowToBlogPost(data as BlogPostRow);
     },
 
-    // (Opcjonalnie) Aktualizacja po slug
+    // Aktualizacja post
     async updatePost(slug: string, updatedPost: Partial<BlogPost>): Promise<boolean> {
         const { error } = await supabase
             .from('Posts')
             .update({
                 title: (updatedPost as any).title ?? undefined,
-                short_description: (updatedPost as any).short_description ?? undefined,
+                short_description: (updatedPost as any).summary ?? undefined,
                 content: (updatedPost as any).content ?? undefined,
                 img_url: (updatedPost as any).img_url ?? undefined,
-                tag: (updatedPost as any).tag ?? undefined,
+                tag: (updatedPost as any).category ?? undefined,
+                order: (updatedPost as any).order ?? undefined,
             })
             .eq('slug', slug);
 
@@ -146,7 +158,7 @@ export const blogService = {
         return true;
     },
 
-    // (Opcjonalnie) Usuwanie po slug
+    // Usuwanie post
     async deletePost(slug: string): Promise<boolean> {
         const { error } = await supabase
             .from('Posts')
@@ -155,6 +167,25 @@ export const blogService = {
 
         if (error) {
             console.error('Błąd deletePost:', error);
+            return false;
+        }
+        return true;
+    },
+
+    // Aktualizuj kolejność postu
+    async updatePostOrder(postId: string, order: number): Promise<boolean> {
+        if (!postId) {
+            console.error('updatePostOrder: brak ID postu');
+            return false;
+        }
+
+        const { error } = await supabase
+            .from('Posts')
+            .update({ order })
+            .eq('id', postId);
+
+        if (error) {
+            console.error('Błąd updatePostOrder:', error);
             return false;
         }
         return true;

@@ -1,10 +1,12 @@
 
 export interface BlogPost {
+  id: string;
   title: string;
   summary: string;
   slug: string;
   content?: string;
   img_url?: string;
+  order?: number;
   category: 'SEO' | 'Content Strategy' | 'Social Media' | string;
 }
 

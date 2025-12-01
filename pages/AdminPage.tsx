@@ -1,10 +1,12 @@
+
 import React, { FormEvent, useState } from 'react';
 import { Lock } from 'lucide-react';
 import BlogAdmin from '../components/admin/BlogAdmin';
+import AdminPostOrder from '../components/AdminPostOrder';
 import ServicesAdmin from "../components/admin/ServicesAdmin.tsx";
 import CardsAdmin from "../components/admin/CardsAdmin.tsx";
 
-type AdminTab = 'blog' | 'services' | 'cards' | 'testimonials';
+type AdminTab = 'blog' | 'blog-order' | 'services' | 'cards' | 'testimonials';
 
 const AdminPage: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -99,6 +101,7 @@ const AdminPage: React.FC = () => {
                 {(
                     [
                         { id: 'blog', label: 'Blog' },
+                        { id: 'blog-order', label: 'Kolejność postów' },
                         { id: 'services', label: 'Usługi' },
                         { id: 'cards', label: 'Karty' },
                         { id: 'testimonials', label: 'Referencje' },
@@ -120,6 +123,8 @@ const AdminPage: React.FC = () => {
 
             {/* Zawartość zakładek */}
             {activeTab === 'blog' && <BlogAdmin />}
+
+            {activeTab === 'blog-order' && <AdminPostOrder />}
 
             {activeTab === 'services' && <ServicesAdmin />}
 
