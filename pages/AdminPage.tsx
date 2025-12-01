@@ -5,6 +5,7 @@ import BlogAdmin from '../components/admin/BlogAdmin';
 import AdminPostOrder from '../components/AdminPostOrder';
 import ServicesAdmin from "../components/admin/ServicesAdmin.tsx";
 import CardsAdmin from "../components/admin/CardsAdmin.tsx";
+import TestimonialsAdmin from "../components/admin/TestimonialsAdmin.tsx";
 
 type AdminTab = 'blog' | 'blog-order' | 'services' | 'cards' | 'testimonials';
 
@@ -130,11 +131,7 @@ const AdminPage: React.FC = () => {
 
             {activeTab === 'cards' && <CardsAdmin />}
 
-            {activeTab === 'testimonials' && (
-                <div className="text-center text-sm text-gray-500 dark:text-neutral-400">
-                    Sekcja &quot;Referencje&quot; jeszcze nie jest zaimplementowana.
-                </div>
-            )}
+            {activeTab === 'testimonials' && <TestimonialsAdmin />}
         </div>
     );
 };
