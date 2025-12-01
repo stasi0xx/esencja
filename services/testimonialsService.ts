@@ -1,10 +1,11 @@
+
 import { supabase } from '../lib/supabaseClient';
-import type { ServiceItem } from '../types';
+import type { TestimonialItem } from '../types';
 
 const TABLE_NAME = 'testimonials';
 
 export const testimonialsService = {
-    async getAll(options?: { includeInactive?: boolean }): Promise<ServiceItem[]> {
+    async getAll(options?: { includeInactive?: boolean }): Promise<TestimonialItem[]> {
         const query = supabase
             .from(TABLE_NAME)
             .select('*')
@@ -17,14 +18,14 @@ export const testimonialsService = {
         const { data, error } = await query;
 
         if (error) {
-            console.error('Error fetching services:', error);
+            console.error('Error fetching testimonials:', error);
             throw error;
         }
 
-        return (data ?? []) as ServiceItem[];
+        return (data ?? []) as TestimonialItem[];
     },
 
-    async getById(id: string): Promise<ServiceItem | null> {
+    async getById(id: string): Promise<TestimonialItem | null> {
         const { data, error } = await supabase
             .from(TABLE_NAME)
             .select('*')
@@ -32,14 +33,14 @@ export const testimonialsService = {
             .single();
 
         if (error) {
-            console.error('Error fetching service by id:', error);
+            console.error('Error fetching testimonial by id:', error);
             throw error;
         }
 
-        return data as ServiceItem | null;
+        return data as TestimonialItem | null;
     },
 
-    async create(payload: Omit<ServiceItem, 'id' | 'created_at' | 'updated_at'>) {
+    async create(payload: Omit<TestimonialItem, 'id' | 'created_at' | 'updated_at'>) {
         const { data, error } = await supabase
             .from(TABLE_NAME)
             .insert(payload)
@@ -47,14 +48,14 @@ export const testimonialsService = {
             .single();
 
         if (error) {
-            console.error('Error creating service:', error);
+            console.error('Error creating testimonial:', error);
             throw error;
         }
 
-        return data as ServiceItem;
+        return data as TestimonialItem;
     },
 
-    async update(id: string, payload: Partial<Omit<ServiceItem, 'id'>>) {
+    async update(id: string, payload: Partial<Omit<TestimonialItem, 'id'>>) {
         const { data, error } = await supabase
             .from(TABLE_NAME)
             .update({
@@ -66,11 +67,11 @@ export const testimonialsService = {
             .single();
 
         if (error) {
-            console.error('Error updating service:', error);
+            console.error('Error updating testimonial:', error);
             throw error;
         }
 
-        return data as ServiceItem;
+        return data as TestimonialItem;
     },
 
     async delete(id: string) {
@@ -80,7 +81,7 @@ export const testimonialsService = {
             .eq('id', id);
 
         if (error) {
-            console.error('Error deleting service:', error);
+            console.error('Error deleting testimonial:', error);
             throw error;
         }
     },
