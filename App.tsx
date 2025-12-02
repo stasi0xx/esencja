@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -18,7 +18,7 @@ import ScrollProgressBar from "./components/ScrollProgressBar.tsx";
 function App() {
   return (
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <AuthProvider>
           <div className="bg-gray-50 dark:bg-neutral-950 text-gray-800 dark:text-neutral-200 min-h-screen antialiased transition-colors duration-300">
             <ScrollProgressBar />
@@ -27,9 +27,9 @@ function App() {
             <main className="pt-20">
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/insights" element={<BlogListPage />} />
+                <Route path="/realizacje" element={<BlogListPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/insights/:slug" element={<BlogPostPage />} />
+                <Route path="/realizacje/:slug" element={<BlogPostPage />} />
                 <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} /> {/* Add Admin Route */}
                 <Route path="/uslugi" element={<ServicesPage />} />
                 <Route path="/kontakt" element={<ContactPage />} />
@@ -39,7 +39,7 @@ function App() {
           </div>
         </AuthProvider>
 
-      </HashRouter>
+      </BrowserRouter>
       <CookieConsent />
     </ThemeProvider>
   );

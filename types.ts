@@ -1,3 +1,21 @@
+export interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+export interface ClientLogo {
+  id: string;
+  name: string;
+  logo_url: string;
+  order: number;
+  is_active: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
+
+
 
 export interface BlogPost {
   id: string;

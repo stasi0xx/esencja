@@ -89,7 +89,7 @@ const Header = () => {
           <NavLink to="/uslugi" className={navLinkClasses} onClick={() => setIsOpen(false)}>CO robimy</NavLink>
         </MagneticElement>
         <MagneticElement>
-          <NavLink to="/insights" className={navLinkClasses} onClick={() => setIsOpen(false)}>JAK realizujemy</NavLink>
+          <NavLink to="/realizacje" className={navLinkClasses} onClick={() => setIsOpen(false)}>JAK realizujemy</NavLink>
         </MagneticElement>
       </>
   );

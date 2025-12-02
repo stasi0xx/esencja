@@ -1,9 +1,10 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { blogService } from '../../services/blogService';
-import type { BlogPost } from '../../types';
+import type {BlogCategory, BlogPost} from '../../types';
 import { RichTextEditor } from '../RichTextEditor';
 import { sanitizeHtml } from '../../utils/sanitizeHtml';
 import { ImageUploadInput } from '../imageUploadInput';
+import { useBlogCategories } from '../../hooks/useBlogCategories';
 
 const BlogAdmin: React.FC = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -12,6 +13,7 @@ const BlogAdmin: React.FC = () => {
     >({});
     const [isEditing, setIsEditing] = useState(false);
     const [img_url, setImageUrl] = useState<string>('');
+    const { categories, loading: categoriesLoading } = useBlogCategories();
 
     useEffect(() => {
         void loadPosts();
@@ -50,11 +52,13 @@ const BlogAdmin: React.FC = () => {
         setCurrentPost((prev) => ({ ...prev, [name]: value }));
     };
 
+
     const handleFormSubmit = async (e: FormEvent) => {
         e.preventDefault();
         const postData = {
             title: currentPost.title || '',
             summary: currentPost.summary || '',
+            slug: currentPost.slug || '',
             category: currentPost.category || 'SEO',
             img_url:
                 img_url ||
@@ -63,21 +67,19 @@ const BlogAdmin: React.FC = () => {
             content: currentPost.content || '',
         };
 
-        if (!postData.title || !postData.summary || !postData.category) {
-            alert('Proszę wypełnić wszystkie pola: Tytuł, Podsumowanie, Kategoria.');
+        if (!postData.title || !postData.summary || !postData.category || !postData.slug) {
+            alert('Proszę wypełnić wszystkie pola: Tytuł, Podsumowanie, Kategoria, Slug.');
             return;
         }
 
         if (isEditing && currentPost.originalSlug) {
             const updatedPost: Partial<BlogPost> = {
                 ...postData,
-                slug: currentPost.slug || currentPost.originalSlug,
             };
             await blogService.updatePost(currentPost.originalSlug, updatedPost);
         } else {
             await blogService.addPost(postData);
         }
-
 
         resetForm();
         await loadPosts();
@@ -177,15 +179,42 @@ const BlogAdmin: React.FC = () => {
                         <select
                             name="category"
                             id="category"
-                            value={currentPost.category || 'SEO'}
+                            value={currentPost.category || (categories[0]?.id || '')}
                             onChange={handleFormChange}
                             className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"
+                            disabled={categoriesLoading}
                         >
-                            <option>SEO</option>
-                            <option>Content Strategy</option>
-                            <option>Social Media</option>
+                            <option value="">-- Wybierz kategorię --</option>
+                            {categories.map((cat: BlogCategory) => (
+                                <option key={cat.id} value={cat.id}>
+                                    {cat.name}
+                                </option>
+                            ))}
                         </select>
+
                     </div>
+
+                    <div>
+                        <label
+                            htmlFor="slug"
+                            className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        >
+                            Slug (URL-friendly nazwa)
+                        </label>
+                        <input
+                            type="text"
+                            name="slug"
+                            id="slug"
+                            value={currentPost.slug || ''}
+                            onChange={handleFormChange}
+                            placeholder="np. moj-artykul-seo"
+                            className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"
+                        />
+                        <p className="mt-1 text-xs text-gray-500 dark:text-neutral-400">
+                            {isEditing ? 'Zmiana slug-a zmieni URL artykułu' : 'Wygenerowany automatycznie, jeśli pominięty'}
+                        </p>
+                    </div>
+
 
                     <div>
                         <ImageUploadInput

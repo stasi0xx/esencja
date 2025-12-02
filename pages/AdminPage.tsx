@@ -6,8 +6,10 @@ import AdminPostOrder from '../components/AdminPostOrder';
 import ServicesAdmin from "../components/admin/ServicesAdmin.tsx";
 import CardsAdmin from "../components/admin/CardsAdmin.tsx";
 import TestimonialsAdmin from "../components/admin/TestimonialsAdmin.tsx";
+import BlogCategoriesAdmin from "../components/admin/BlogCategoriesAdmin.tsx";
+import ClientLogosAdmin from "../components/admin/ClientLogosAdmin.tsx";
 
-type AdminTab = 'blog' | 'blog-order' | 'services' | 'cards' | 'testimonials';
+type AdminTab = 'blog' | 'blog-order' | 'services' | 'cards' | 'testimonials' | 'blog-categories' | 'client-logos';
 
 const AdminPage: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -81,17 +83,6 @@ const AdminPage: React.FC = () => {
 
     return (
         <div className="container mx-auto px-6 py-16">
-            <div
-                className="bg-yellow-100 dark:bg-yellow-900/50 border-l-4 border-yellow-500 text-yellow-700 dark:text-yellow-200 p-4 rounded-md mb-8"
-                role="alert"
-            >
-                <p className="font-bold">Tryb demonstracyjny</p>
-                <p>
-                    Zmiany w tym panelu są tylko tymczasowe i zostaną utracone po
-                    odświeżeniu strony. Ta wersja demonstracyjna nie posiada trwałej bazy
-                    danych.
-                </p>
-            </div>
 
             <h1 className="text-4xl font-bold mb-6 text-center dark:text-white">
                 Panel Administratora
@@ -103,9 +94,11 @@ const AdminPage: React.FC = () => {
                     [
                         { id: 'blog', label: 'Blog' },
                         { id: 'blog-order', label: 'Kolejność postów' },
+                        { id: 'blog-categories', label: 'Kategorie bloga' },
                         { id: 'services', label: 'Usługi' },
                         { id: 'cards', label: 'Karty' },
                         { id: 'testimonials', label: 'Referencje' },
+                        { id: 'client-logos', label: 'Loga klientów' },
                     ] as const
                 ).map((tab) => (
                     <button
@@ -124,14 +117,12 @@ const AdminPage: React.FC = () => {
 
             {/* Zawartość zakładek */}
             {activeTab === 'blog' && <BlogAdmin />}
-
             {activeTab === 'blog-order' && <AdminPostOrder />}
-
+            {activeTab === 'blog-categories' && <BlogCategoriesAdmin />}
             {activeTab === 'services' && <ServicesAdmin />}
-
             {activeTab === 'cards' && <CardsAdmin />}
-
             {activeTab === 'testimonials' && <TestimonialsAdmin />}
+            {activeTab === 'client-logos' && <ClientLogosAdmin />}
         </div>
     );
 };

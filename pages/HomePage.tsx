@@ -176,7 +176,7 @@ const HomePage = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Sprawdź Co robimy</h2>
             <p className="text-gray-600 dark:text-neutral-400 mt-4 max-w-2xl mx-auto">Poznaj historie marek, którym pomogliśmy i odkryj nasze podejście do kreatywnej reklamy.</p>
             <div className="mt-8">
-                <Button to="/kontakt" text="Twój ruch" />
+                <Button to="/realizacje" text="JAK realizujemy" />
             </div>
         </AnimatedElement>
       </section>

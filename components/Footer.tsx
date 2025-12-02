@@ -22,10 +22,7 @@ const Footer = () => {
       <SectionSeparator />
       <div className="container mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">ESENCJA</h3>
-            <p className="text-sm mt-1">Napędzamy wzrost poprzez innowacje.</p>
-          </div>
+
           <div className="flex space-x-6">
           <SocialIcon href="https://www.facebook.com/ESENCJA"><Facebook size={20} /></SocialIcon>
           <SocialIcon href="https://www.instagram.com/esencjareklamy"><Instagram size={20} /></SocialIcon>

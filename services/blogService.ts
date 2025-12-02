@@ -138,12 +138,14 @@ export const blogService = {
     },
 
     // Aktualizacja post
+
     async updatePost(slug: string, updatedPost: Partial<BlogPost>): Promise<boolean> {
         const { error } = await supabase
             .from('Posts')
             .update({
                 title: (updatedPost as any).title ?? undefined,
                 short_description: (updatedPost as any).summary ?? undefined,
+                slug: (updatedPost as any).slug ?? undefined,
                 content: (updatedPost as any).content ?? undefined,
                 img_url: (updatedPost as any).img_url ?? undefined,
                 tag: (updatedPost as any).category ?? undefined,

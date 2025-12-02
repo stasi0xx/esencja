@@ -4,6 +4,8 @@ import { blogService } from '../services/blogService';
 import type { BlogPost } from '../types';
 import AnimatedElement from '../components/AnimatedElement';
 import { ArrowRight } from 'lucide-react';
+import { useBlogCategories } from '../hooks/useBlogCategories';
+
 
 const BlogCardSkeleton = () => (
     <div className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg p-6 animate-pulse shadow-sm">
@@ -26,7 +28,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
     return (
         <AnimatedElement delay={index * 100}>
             <Link
-                to={`/insights/${post.slug}`}
+                to={`/realizacje/${post.slug}`}
                 state={{ title: post.title, img_url: post.img_url , slug: post.slug }}
             >
                 <div className="group relative block bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-800 rounded-lg overflow-hidden h-full transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg dark:hover:shadow-gray-700/50">
@@ -62,7 +64,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ post, index }) => {
 };
 
 // Fix: Changed Polish category names to English to match the BlogPost type.
-const categories = ['Wszystkie', 'SEO', 'Content Strategy', 'Social Media'];
+
+
 const POSTS_PER_PAGE = 6;
 
 const BlogListPage = () => {
@@ -71,6 +74,8 @@ const BlogListPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState('Wszystkie');
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
+    const { categories: dbCategories } = useBlogCategories();
+    const categories = ['Wszystkie', ...dbCategories.map(cat => cat.name)];
 
   const fetchPosts = useCallback(async () => {
     try {
