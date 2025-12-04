@@ -13,12 +13,14 @@ import LoginPage from './auth/LoginPage';
 import CookieConsent from "./components/CookieConsent.tsx";
 import ContactPage from "./pages/ContactPage.tsx";
 import ScrollProgressBar from "./components/ScrollProgressBar.tsx";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 
 function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <AuthProvider>
           <div className="bg-gray-50 dark:bg-neutral-950 text-gray-800 dark:text-neutral-200 min-h-screen antialiased transition-colors duration-300">
             <ScrollProgressBar />

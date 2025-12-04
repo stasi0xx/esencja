@@ -46,6 +46,9 @@ const Counter: React.FC<CounterProps> = ({ to }) => {
 const ClientLogos = () => {
   const { logos, loading } = useClientLogos();
 
+  // Duplicate logos for seamless loop
+  const extendedLogos = [...logos, ...logos, ...logos, ...logos];
+
   return (
       <section className="container mx-auto px-6 py-16">
         <AnimatedElement className="text-center">
@@ -60,25 +63,36 @@ const ClientLogos = () => {
           </p>
         </AnimatedElement>
 
-        <AnimatedElement delay={200}>
-          <div className="mt-12 flex justify-center items-center flex-wrap gap-x-12 gap-y-8">
-            {loading ? (
-                <p className="text-gray-500">Ładowanie logoów...</p>
-            ) : (
-                logos
+        {loading ? (
+            <p className="text-center text-gray-500 mt-12">Ładowanie logoów...</p>
+        ) : (
+            <div
+                className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mt-12"
+                role="region"
+                aria-label="Loga klientów - karuzela"
+            >
+              <ul className="flex items-center justify-center md:justify-start [&_li]:mx-8 animate-scroll [animation-play-state:running] hover:[animation-play-state:paused]">
+                {extendedLogos
                     .sort((a, b) => a.order - b.order)
-                    .map((logo) => (
-                        <div key={logo.id} title={logo.name} className="h-16 flex items-center justify-center hover:opacity-80 transition-opacity duration-300">
+                    .map((logo, index) => (
+                        <li
+                            key={index}
+                            title={logo.name}
+                            className="h-16 flex items-center justify-center hover:opacity-80 transition-opacity duration-300 flex-shrink-0 cursor-grab active:cursor-grabbing"
+                            role="listitem"
+                        >
                           <img
                               src={logo.logo_url}
                               alt={logo.name}
                               className="max-h-16 max-w-xs object-contain"
+                              loading="lazy"
                           />
-                        </div>
+                        </li>
                     ))
-            )}
-          </div>
-        </AnimatedElement>
+                }
+              </ul>
+            </div>
+        )}
       </section>
   );
 };

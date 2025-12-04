@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,3 +7,103 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ========================
+   CAROUSEL ANIMATIONS
+   ======================== */
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-50% - 16px));
+    }
+}
+
+/* Testimonials Carousel */
+@layer components {
+    .testimonials-scroll {
+        animation: scroll 40s linear infinite;
+        /* USUNĘŁA animation-play-state: running !!! */
+    }
+}
+
+/* Logos Carousel */
+.logos-scroll {
+    animation: scroll 200s linear infinite;
+    /* USUNĘŁA animation-play-state: running !!! */
+}
+
+/* ========================
+   SMOOTH TRANSITIONS
+   ======================== */
+
+.testimonials-scroll,
+.logos-scroll {
+    transition: filter 0.3s ease-out, opacity 0.3s ease-out;
+    will-change: transform;
+}
+
+/* ========================
+   REDUCED MOTION SUPPORT
+   ======================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonials-scroll,
+    .logos-scroll {
+        animation: none !important;
+        animation-play-state: paused !important;
+    }
+}
+
+/* ========================
+   ACCESSIBILITY
+   ======================== */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus states for keyboard navigation */
+.testimonials-scroll li:focus-visible,
+.logos-scroll li:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-500 dark:outline-blue-400 rounded;
+}
+
+/* ========================
+   MOBILE TOUCH OPTIMIZATION
+   ======================== */
+
+@media (hover: none) {
+    .testimonials-scroll,
+    .logos-scroll {
+        /* Touch devices - managed by JavaScript */
+        animation-play-state: running;
+    }
+
+    /* Grab cursor on touch devices */
+    .testimonials-scroll li,
+    .logos-scroll li {
+        touch-action: pan-y;
+    }
+}
+
+/* ========================
+   DESKTOP HOVER OPTIMIZATION
+   ======================== */
+
+@media (hover: hover) and (pointer: fine) {
+    /* Desktop with mouse */
+    .testimonials-scroll li:hover,
+    .logos-scroll li:hover {
+        @apply scale-105 transition-transform duration-300;
+    }
+}

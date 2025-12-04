@@ -130,7 +130,7 @@ const HomePage = () => {
 
             <div ref={buttonWrapperRef} className="transition-transform duration-300 ease-out will-change-transform">
                 <AnimatedElement delay={400} className="mt-10">
-                    <Button to="/insights" text="Nasze Podejście" />
+                    <Button to="/realizacje" text="Nasze Podejście" />
                 </AnimatedElement>
             </div>
         </div>

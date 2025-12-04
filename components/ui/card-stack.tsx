@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
@@ -8,8 +9,6 @@ type Card = {
     designation: string;
     content: React.ReactNode;
     icon?: React.ReactNode;
-
-    // opcjonalnie: icon?: React.ReactNode; // jeżeli chcesz przekazywać własne ikony
 };
 
 interface CardStackProps {
@@ -68,16 +67,16 @@ export const CardStack = ({
     }, [items, currentIndex]);
 
     return (
-        <div className="relative h-80 w-80 md:h-80 md:w-[28rem]">
+        <div className="relative h-80 w-72 sm:w-80 md:h-80 md:w-[28rem]">
             {displayCards.map((card, index) => {
                 return (
                     <motion.div
                         key={card.id}
-                        className={`absolute h-80 w-80 md:h-80 md:w-[30rem] rounded-3xl p-8
+                        className={`absolute h-80 w-72 sm:w-80 md:h-80 md:w-[30rem] rounded-3xl p-6 sm:p-8
                         bg-white dark:bg-neutral-900
                         border border-gray-200 dark:border-neutral-800
                         shadow-sm shadow-black/10 dark:shadow-black/20
-                        flex flex-col items-center text-center
+                        flex flex-col items-center text-center overflow-hidden
                         ${
                             index === 0 ? "cursor-pointer" : ""
                         }`}
@@ -93,30 +92,27 @@ export const CardStack = ({
                     >
                         {/* IKONA NA GÓRZE */}
                         <div className="flex items-center justify-center mb-4">
-                            {/* podmień na realną ikonę / card.icon jeżeli dodasz ją do typu Card */}
                             <div className="flex items-center justify-center text-gray-700 dark:text-neutral-200 text-4xl">
-                                {/* placeholder ikony, np. litera z nazwy */}
                                 {card.icon ?? (
                                     <span className="text-2xl font-semibold">
-        {card.name.charAt(0)}
-      </span>
+                                        {card.name.charAt(0)}
+                                    </span>
                                 )}
-
                             </div>
                         </div>
 
                         {/* NAGŁÓWEK + SUBNAGŁÓWEK */}
-                        <div className="mb-4">
-                            <h3 className="font-bold text-xl text-gray-900 dark:text-white">
+                        <div className="mb-4 px-2">
+                            <h3 className="font-bold text-lg sm:text-xl text-gray-900 dark:text-white break-words">
                                 {card.name}
                             </h3>
-                            <p className="text-sm text-gray-500 dark:text-neutral-400 mt-1">
+                            <p className="text-xs sm:text-sm text-gray-500 dark:text-neutral-400 mt-1 break-words">
                                 {card.designation}
                             </p>
                         </div>
 
                         {/* CONTENT MNIEJSZĄ CZCIONKĄ */}
-                        <div className="mt-2 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                        <div className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed px-2 overflow-y-auto max-h-32">
                             {card.content}
                         </div>
                     </motion.div>

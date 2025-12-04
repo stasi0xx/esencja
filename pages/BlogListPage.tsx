@@ -5,6 +5,7 @@ import type { BlogPost } from '../types';
 import AnimatedElement from '../components/AnimatedElement';
 import { ArrowRight } from 'lucide-react';
 import { useBlogCategories } from '../hooks/useBlogCategories';
+import AnimatedDots from "../components/AnimatedDots.tsx";
 
 
 const BlogCardSkeleton = () => (
@@ -118,7 +119,8 @@ const BlogListPage = () => {
 
   return (
     <div className="container mx-auto px-6 py-16">
-      <AnimatedElement>
+        <AnimatedDots />
+        <AnimatedElement>
         <h1 className="text-5xl md:text-6xl font-black text-center mb-4 dark:text-white">JAK realizujemy </h1>
         <p className="text-lg text-gray-600 dark:text-neutral-400 text-center max-w-3xl mx-auto">
             Poznaj nasze projekty w akcji - od kampanii i grafik, po strony internetowe, sklepy online i wydarzenia. Zobacz, jak pomysły zamieniamy w realne efekty.
