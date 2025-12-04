@@ -83,7 +83,7 @@ const ClientLogos = () => {
                         // 4. Usunięcie problematycznej klasy hover: i zastąpienie jej stylem inline
                         className={`flex items-center justify-center md:justify-start [&_li]:mx-8 animate-scroll [animation-play-state:running]`}
                         style={{
-                            animationPlayState: isPaused ? 'paused' : 'running',
+                            animationPlayState: isPaused ? 'paused' : undefined,
                             cursor: 'pointer' // Wizualna wskazówka, że można kliknąć
                         }}
                     >

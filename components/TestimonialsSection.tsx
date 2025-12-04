@@ -64,7 +64,7 @@ const TestimonialsSection = () => {
                         hover:[animation-play-state:paused]
                     `}
                     style={{
-                        animationPlayState: isPaused ? 'paused' : 'running',
+                        animationPlayState: isPaused ? 'paused' : undefined,
                         cursor: 'pointer' // Wizualna wskazówka, że można kliknąć
                     }}
                 >
