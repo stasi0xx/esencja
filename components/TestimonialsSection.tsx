@@ -1,11 +1,17 @@
+import  { useState } from 'react'; // Dodano useState
 import { useTestimonials } from '../hooks/useTestimonials';
 import AnimatedElement from './AnimatedElement';
 
 const TestimonialsSection = () => {
     const { testimonials, loading, error } = useTestimonials();
+    const [isPaused, setIsPaused] = useState(false); // Stan pauzy
 
     // Duplicate testimonials for seamless loop
     const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
+
+    const togglePause = () => {
+        setIsPaused(prev => !prev);
+    };
 
     if (error) {
         return (
@@ -46,8 +52,22 @@ const TestimonialsSection = () => {
                 </AnimatedElement>
             </div>
 
-            <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mt-16">
-                <ul className="flex items-center justify-center md:justify-start [&_li]:mx-4 animate-scroll [animation-play-state:running] hover:[animation-play-state:paused]">
+            <div
+                onClick={togglePause}
+                className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mt-16 cursor-pointer"
+                role="region"
+                aria-label="Opinie klientów - karuzela"
+            >
+                <ul
+                    className={`
+                        flex items-center justify-center md:justify-start [&_li]:mx-4 animate-scroll
+                        hover:[animation-play-state:paused]
+                    `}
+                    style={{
+                        animationPlayState: isPaused ? 'paused' : 'running',
+                        cursor: 'pointer' // Wizualna wskazówka, że można kliknąć
+                    }}
+                >
                     {extendedTestimonials.map((testimonial, index) => (
                         <li key={index} className="w-[350px] max-w-full flex-shrink-0 bg-white dark:bg-neutral-950/80 rounded-lg shadow-lg p-6 border border-gray-200 dark:border-neutral-800/50 backdrop-blur-sm">
                             <blockquote className="text-gray-600 dark:text-neutral-400 mb-4 italic">"{testimonial.quote}"</blockquote>
