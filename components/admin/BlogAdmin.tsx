@@ -179,14 +179,14 @@ const BlogAdmin: React.FC = () => {
                         <select
                             name="category"
                             id="category"
-                            value={currentPost.category || (categories[0]?.id || '')}
+                            value={currentPost.category || ''}
                             onChange={handleFormChange}
                             className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white p-2"
                             disabled={categoriesLoading}
                         >
                             <option value="">-- Wybierz kategorię --</option>
                             {categories.map((cat: BlogCategory) => (
-                                <option key={cat.id} value={cat.id}>
+                                <option key={cat.id} value={cat.name}>
                                     {cat.name}
                                 </option>
                             ))}

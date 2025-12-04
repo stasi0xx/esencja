@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'; // DODANO: useState
+
+import React, { useEffect, useRef } from 'react';
 import { animate } from 'framer-motion';
 import AnimatedElement from './AnimatedElement';
 import { useClientLogos } from '../hooks/useClientLogos';
@@ -44,16 +45,6 @@ const Counter: React.FC<CounterProps> = ({ to }) => {
 
 const ClientLogos = () => {
     const { logos, loading } = useClientLogos();
-    // 1. Dodanie stanu do zarządzania pauzą
-    const [isPaused, setIsPaused] = useState(false);
-
-    // Duplikacja logotypów dla płynnej pętli
-    const extendedLogos = [...logos, ...logos, ...logos, ...logos];
-
-    // 2. Funkcja do przełączania pauzy
-    const togglePause = () => {
-        setIsPaused(prev => !prev);
-    };
 
     return (
         <section className="container mx-auto px-6 py-16">
@@ -69,45 +60,25 @@ const ClientLogos = () => {
                 </p>
             </AnimatedElement>
 
-            {loading ? (
-                <p className="text-center text-gray-500 mt-12">Ładowanie logoów...</p>
-            ) : (
-                <div
-                    // 3. Dodanie obsługi kliknięcia/dotknięcia do kontenera karuzeli
-                    onClick={togglePause}
-                    className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)] mt-12"
-                    role="region"
-                    aria-label="Loga klientów - karuzela"
-                >
-                    <ul
-                        // 4. Usunięcie problematycznej klasy hover: i zastąpienie jej stylem inline
-                        className={`flex items-center justify-center md:justify-start [&_li]:mx-8 animate-scroll [animation-play-state:running] hover:[animation-play-state:paused]`}
-                        style={{
-                            animationPlayState: isPaused ? 'paused' : undefined,
-                            cursor: 'pointer' // Wizualna wskazówka, że można kliknąć
-                        }}
-                    >
-                        {extendedLogos
+            <AnimatedElement delay={200}>
+                <div className="mt-12 flex justify-center items-center flex-wrap gap-x-12 gap-y-8">
+                    {loading ? (
+                        <p className="text-gray-500">Ładowanie logoów...</p>
+                    ) : (
+                        logos
                             .sort((a, b) => a.order - b.order)
-                            .map((logo, index) => (
-                                <li
-                                    key={index}
-                                    title={logo.name}
-                                    className="h-16 flex items-center justify-center hover:opacity-80 transition-opacity duration-300 flex-shrink-0 cursor-grab active:cursor-grabbing"
-                                    role="listitem"
-                                >
+                            .map((logo) => (
+                                <div key={logo.id} title={logo.name} className="h-16 flex items-center justify-center hover:opacity-80 transition-opacity duration-300">
                                     <img
                                         src={logo.logo_url}
                                         alt={logo.name}
                                         className="max-h-16 max-w-xs object-contain"
-                                        loading="lazy"
                                     />
-                                </li>
+                                </div>
                             ))
-                        }
-                    </ul>
+                    )}
                 </div>
-            )}
+            </AnimatedElement>
         </section>
     );
 };
