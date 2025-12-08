@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AnimatedElement from '../components/AnimatedElement';
 import { MapPin, Phone, Mail, Clock, Building2 } from 'lucide-react';
 import ButtonAction from "../components/ButtonAction.tsx";
 
+declare global {
+        interface Window {
+              gtag: (...args: any[]) => void;
+           }
+    }
+
+const CONVERSION_ID = 'AW-961285751/I1VbCO-chM0bEPecsMoD';
+
 const ContactPage: React.FC = () => {
     const [emailCopied, setEmailCopied] = useState(false);
+
+    useEffect(() => {
+             if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('event', 'conversion', {
+                              send_to: CONVERSION_ID
+                       });
+                 }
+           }, []);
 
     const handleCopyEmail = async () => {
         try {
