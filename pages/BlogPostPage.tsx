@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Helmet } from 'react-helmet-async';
 import { blogService } from '../services/blogService';
 import AnimatedElement from '../components/AnimatedElement';
 import type { BlogPost } from '../types';
@@ -59,9 +60,29 @@ const BlogPostPage = () => {
     // Heurystyka: jeśli treść zawiera tagi HTML, potraktuj ją jako HTML
     const content = post?.content || '';
     const isProbablyHtml = /<\/?[a-z][\s\S]*>/i.test(content);
+    const currentUrl = window.location.href;
 
     return (
         <div className="container mx-auto px-6 py-16">
+            <Helmet>
+                {/* Tytuł w karcie przeglądarki */}
+                <title>{title} | Esencja</title>
+                <meta name="description" content={post?.summary} />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={currentUrl} />
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={post?.summary} />
+                {imageUrl && <meta property="og:image" content={imageUrl} />}
+
+                {/* Twitter */}
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content={title} />
+                <meta name="twitter:description" content={post?.summary} />
+                {imageUrl && <meta name="twitter:image" content={imageUrl} />}
+            </Helmet>
+
             <article className="max-w-4xl mx-auto">
                 <AnimatedElement>
                     <h1 className="text-4xl md:text-6xl font-black text-center mb-8 dark:text-white">{title}</h1>

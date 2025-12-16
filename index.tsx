@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import * as Sentry from "@sentry/react";
 import App from './App';
 import './index.css';
+import {HelmetProvider} from "react-helmet-async";
 
 Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN,
@@ -19,6 +20,8 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+      <HelmetProvider>
+          <App />
+      </HelmetProvider>
   </React.StrictMode>
 );
