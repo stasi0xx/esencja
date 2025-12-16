@@ -17,7 +17,7 @@ const ContactPage: React.FC = () => {
     useEffect(() => {
              if (typeof window !== 'undefined' && window.gtag) {
                         window.gtag('event', 'conversion', {
-                              send_to: CONVERSION_ID
+                              'send_to': `${CONVERSION_ID}`
                        });
                  }
            }, []);

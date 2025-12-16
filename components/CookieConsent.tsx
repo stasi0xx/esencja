@@ -3,6 +3,14 @@ import { X } from "lucide-react";
 
 const COOKIE_STORAGE_KEY = "cookie-consent";
 
+declare global {
+        interface Window {
+                gtag: (...args: any[]) => void;
+            }
+    }
+
+    const AW_TRACKING_ID = 'G-Z329FTMTW1';
+
 const CookieConsent: React.FC = () => {
     const [visible, setVisible] = useState(false);
 
@@ -19,6 +27,10 @@ const CookieConsent: React.FC = () => {
     }, []);
 
     const handleAccept = () => {
+        if (typeof window !== 'undefined' && window.gtag) {
+                        window.gtag('config', AW_TRACKING_ID);
+                    }
+
         try {
             window.localStorage.setItem(COOKIE_STORAGE_KEY, "accepted");
         } catch {
